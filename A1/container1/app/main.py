@@ -6,7 +6,7 @@ import os
 app = FastAPI()
 
 class InputData(BaseModel):
-    file: str
+    file: str | None
     product: str
 
 @app.post("/calculate")
