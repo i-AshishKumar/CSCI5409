@@ -17,7 +17,7 @@ async def calculate(data: InputData):
     file_path = f"/shared_volume/{file_name}"
 
     if file_name == None:
-        return {"file": None, "error": "Invalid JSON input."}
+        return {"error": "Invalid JSON input.", "file": None,}
 
     if not os.path.exists(file_path):
         return {"file": file_name, "error": "File not found."}
