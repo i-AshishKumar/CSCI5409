@@ -16,9 +16,20 @@ async def sum_product(data: InputData):
 
     file_path = f"/shared_volume/{file_name}"
 
-    with open(file_path, newline='') as csvfile:
-        csv_reader = csv.reader(csvfile, delimiter=',')
-        for row in csv_reader:
-            if(row[0] == product):
-                sum = sum + int(row[1])
-    return { "file": file_name, "sum": sum}
+    sum = 0
+    try:
+        with open(file_path, newline='') as csvfile:
+            # TEST 4: Invalid CSV format check
+            csv_reader = csv.reader(csvfile, delimiter=',')
+            header = next(csv_reader)
+            if header != ["product", "amount"]:
+                return {"file": file_name, "error": "Input file not in CSV format." }
+            
+            # TEST 3: Calculate Sum
+            csv_reader = csv.reader(csvfile, delimiter=',')
+            for row in csv_reader:
+                if(row[0] == product):
+                    sum = sum + int(row[1])
+            return { "file": file_name, "sum": sum}
+    except Exception as e:
+        pass
