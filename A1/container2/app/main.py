@@ -5,7 +5,7 @@ import csv
 app = FastAPI()
 
 class InputData(BaseModel):
-    file: str
+    file: str | None
     product: str
 
 @app.post("/sum")
