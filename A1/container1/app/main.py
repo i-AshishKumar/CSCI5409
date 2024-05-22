@@ -1,12 +1,13 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from typing import Optional
 import requests
 import os
 
 app = FastAPI()
 
 class InputData(BaseModel):
-    file: str | None
+    file: Optional[str] 
     product: str
 
 @app.post("/calculate")
