@@ -1,11 +1,12 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from pydantic import BaseModel
+from typing import Optional
 import csv
 
 app = FastAPI()
 
 class InputData(BaseModel):
-    file: str | None
+    file: Optional[str] 
     product: str
 
 @app.post("/sum")
