@@ -17,11 +17,13 @@ async def calculate(data: InputData):
     
     file_path = f"/shared_volume/{file_name}"
 
+    if file_name == None:
+        return {"file": None, "error": "Invalid JSON input."}
+
     if not os.path.exists(file_path):
         return {"file": file_name, "error": "File not found."}
 
-    if not file_name:
-        return {"file": None, "error": "Invalid JSON input."}
+
 
     response = requests.post("http://container2:7000/sum", json={"file": file_name, "product": product})
     return response.json()
