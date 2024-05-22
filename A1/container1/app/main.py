@@ -6,7 +6,7 @@ import os
 app = FastAPI()
 
 class InputData(BaseModel):
-    file: str | None
+    file: str
     product: str
 
 @app.post("/calculate")
@@ -19,7 +19,7 @@ async def calculate(data: InputData):
     if not os.path.exists(file_path):
         return {"file": file_name, "error": "File not found."}
 
-    if file_name == None:
+    if not file_name:
         return {"file": None, "error": "Invalid JSON input."}
 
     response = requests.post("http://container2:7000/sum", json={"file": file_name, "product": product})
