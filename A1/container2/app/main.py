@@ -22,10 +22,12 @@ async def sum_product(data: InputData):
             # TEST 4: Invalid CSV format check
             csv_reader = csv.reader(csvfile, delimiter=',')
             header = next(csv_reader)
+            # Checking if the header matches the expected format
             if header != ["product", "amount"]:
                 return {"file": file_name, "error": "Input file not in CSV format." }
             
             # TEST 3: Calculate Sum
+            # Iterate over the remaining rows in the CSV file
             csv_reader = csv.reader(csvfile, delimiter=',')
             for row in csv_reader:
                 if(row[0] == product):
