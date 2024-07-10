@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1-deployment
+  labels:
+    app: app1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app1
+  template:
+    metadata:
+      labels:
+        app: app1
+    spec:
+      containers:
+      - name: app1-container
+        image: us-central1-docker.pkg.dev/kubernetes-assignment-427522/k8s-assign/app1:latest
+        volumeMounts:
+        - mountPath: /Ashish_PV_dir
+          name: standard-volume
+      volumes:
+      - name: standard-volume
+        persistentVolumeClaim:
+          claimName: standard-rwo-pvc
+---
+#PVC
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: standard-rwo-pvc
+spec:
+  storageClassName: standard-rwo
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+#Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: app1-service
+  labels:
+    app: app1
+spec:
+  type: LoadBalancer
+  selector:
+    app: app1
+  ports:
+  - port: 80
+    targetPort: 6000
