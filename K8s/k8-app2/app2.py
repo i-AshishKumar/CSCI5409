@@ -8,7 +8,8 @@ app = FastAPI()
 class InputData(BaseModel):
     file: Optional[str] 
     product: str
-
+    
+    
 @app.post("/sum")
 async def sum_product(data: InputData):
     file_name = data.file

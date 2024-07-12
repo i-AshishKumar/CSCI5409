@@ -11,7 +11,6 @@ class InputData(BaseModel):
     product: str
 
 
-
 @app.post("/calculate")
 async def calculate(data: InputData):
     file_name = data.file
