@@ -1,4 +1,4 @@
-import bcrypt from 'bcryptjs';
+  import bcrypt from 'bcryptjs';
 import axios from 'axios';
 
 export const handler = async (event, context) => {
